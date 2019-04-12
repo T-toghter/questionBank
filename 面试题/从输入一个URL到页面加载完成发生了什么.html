@@ -1,0 +1,40 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <meta http-equiv="X-UA-Compatible" content="ie=edge">
+  <title>Document</title>
+</head>
+<body>
+  <script>
+    //1.DNS解析(第一次输入地址，浏览器会把之个地址缓存早本地DNS，以便下次继续使用)
+        //首先会通过ip地址在本地的DNS服务器上查找,本地没有就想远程的DNS服务器查找
+    //2.TCP连接(三次握手)
+        //第一次握手:客户端发送syn包(同步序列编号,客户端与服务端传递信息握手的信号)到服务器,等待服务器确认
+        //第二次握手:服务器接收到syn包,并返回一个自己的syn包
+        //第三次握手:客户端接收到服务端的syn包,向服务端确认,完成连接
+    //3.浏览器向服务器发送HTTP请求(包括,请求头部,请求主体)
+        //请求行(Request Line): a.请求方法 b.请求地址 c.协议版本
+        //请求行(Header): a.设置缓存规则 b.数据传输形式(content-type:application/x-www-form-urlencoded(key=value&key=value),multipart/form-data(键值对))
+        //请求行(Request Body): 指请求参数(post请求)
+    //4.浏览器接受回应
+        //状态码 2xx(成功) 3xx(重定向) 4xx(客户端错误) 5xx(服务端错误)
+    //5.渲染页面构建Dom树
+    //6.关闭TCP连接
+
+
+
+    //get和post请求方式的区别
+      //1.get拼接放在url后面,post放在请求报文体中,post相对更安全
+      //2.get可以被缓存,post不行
+
+
+    //http和https的区别
+      //1.https需要CA申请证书,http不需要
+      //2.https通过的SSL(安全嵌套)加密,http直接明文传输
+      //3.https端口443,http端口80
+      //4.https是有状态的,http+SSL加密+认证,较http无状态的更安全
+  </script>
+</body>
+</html>

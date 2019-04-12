@@ -1,0 +1,43 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <meta http-equiv="X-UA-Compatible" content="ie=edge">
+  <title>Document</title>
+</head>
+<body>
+  <script>
+    //堆和栈的区别:
+    //栈:先进先出,操作系统自动分配释放,基本数据类型:undefined,null,boolean,number,string
+    //堆:先进后出,由程序员自己分配释放。存放在内存中,保存实际上是指针指向一个地址。引用数据类型:object,array,function
+
+    //例子
+    var a = [1,2,3,4,5]; 
+    var b =a;//此时变量a,b指向同一个堆上的对象
+    var c = a[0];
+    console.log(b);//弹出1,2,3,4,5
+    console.log(c);//弹出1
+    b[4] = 6;//改变的栈上对象
+    c = 7;
+    console.log(a[4]);
+    console.log(a[0]);
+    //当改变b数据，a中数据对应也发生了变化，但是改变c中数据时，a的值并没有发生变化，这就是传值与传址的区别，因为a是数组型，属于引用型，所以它赋给b的时候传的是栈中的地址（相当于新建了一个不同名的“指针”），而不是堆内存中的对象。
+    //而c仅仅是从a堆内存中获取了一个数据值，并保存在栈中。所以当b修改时，会根据地址回到a堆中修改，c则直接在栈中修改，并且不能指向a堆内存中
+
+
+    //深浅拷贝
+    function copy(obj) {
+      var obj1 = {};
+      for(var k in obj){  //遍历对象
+        if(obj[k] == 'object'){ //判断obj的每个对象是否是对象数据类型
+          obj1[k] = copy(obj[k])
+        }else{
+          obj1[k] = obj[k]
+        }
+      }
+      return obj1;
+    }
+  </script>
+</body>
+</html>

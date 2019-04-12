@@ -1,0 +1,53 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <meta http-equiv="X-UA-Compatible" content="ie=edge">
+  <title>Document</title>
+</head>
+<body>
+  <script>
+    // function Far() {
+    //   this.name = 'father';
+    //   this.sleep = function(){
+    //     console.log(this.name + '正在睡觉！');
+    //   }
+    // }
+    //1.原型链继承(子函数的原型指向父函数的实例,再通过子函数的实例上的原型链继承到父函数的数据)
+    // function Son() {
+    //   this.name = 'son';
+    // }
+    // Son.prototype = new Far();
+    // var son = new Son();
+    // console.log(son.__proto__.name);
+    //2.构造函数继承
+    // function Son() {
+    //   Far.call(this);
+    //   this.name = 'son';
+    // }
+    // var son = new Son();
+    //3.ES6继承
+    // class Farther {
+    //   constructor(name){
+    //     this.name = name;
+    //   }
+    // }
+    // class Son extends Farther {
+    //   constructor(name,farName){  //第一个参数为子函数的参数,第二个参数为父函数的参数
+    //     super(farName);
+    //     this.name = name;  
+    //   }
+    // }
+    // var son = new Son('son', 'father');
+    // console.log(son);
+    //4.Object.create()
+    // function Parent() {
+    //     age: 50
+    // };
+    // var p = new Parent();
+    // var child = Object.create(p);
+    // 这里 child 是一个新的空对象，有一个指向对象 p 的指针 __proto__
+  </script>
+</body>
+</html>
