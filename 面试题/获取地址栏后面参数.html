@@ -1,0 +1,26 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <meta http-equiv="X-UA-Compatible" content="ie=edge">
+  <title>Document</title>
+</head>
+<body>
+  <script>
+    //获取地址栏后面的参数
+    function getSearch() {
+      var obj = {};
+      var search = location.search;
+      search = search.slice(1);
+      var param = search.split('&');
+      param.forEach(function (item,i) {
+        var key = item.split('=')[0];
+        var value = item.split('=')[1];
+        obj[key] = value;
+      })
+      return obj;
+    }
+  </script>
+</body>
+</html>

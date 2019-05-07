@@ -1,0 +1,52 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <meta http-equiv="X-UA-Compatible" content="ie=edge">
+  <title>Document</title>
+</head>
+<body>
+  <script>
+    function myPromise(constructor) {
+      let self = this;
+      self.status = 'pedding';  //定义状态改变前的初始状态
+      self.value = undefined;   //定义状态resolved(成功)的时候的状态
+      self.reason = undefined;  //定义状态为rejected(失败)的时候的状态
+      function resolve(value) {  //padding->resolved
+        if(self.status == 'padding'){
+          self.value = value;
+          self.status = 'resolved';
+        }
+      }
+      function reject(reason) { //padding->rejected
+        if(self.status == 'padding'){
+          self.reason = reason;
+          self.status = 'rejected';
+        }
+      }
+      //捕获结构异常
+      try{
+        constructor(resolve,reject)
+      }catch(e){
+        reject(e)
+      }
+    }
+    //在原型上定义链式调用的then方法,当resolve(成功)/reject(失败)的回调函数
+    myPromise.prototype.then = function (onResolved,onRejected) {
+      let self = this;
+      switch (self.status) {
+        case 'resolved':
+          onResolved(self.value);
+          break;
+        case 'rejected':
+          onRejected(self.reason);
+        default:
+          break;
+      }
+    }
+
+
+  </script>
+</body>
+</html>

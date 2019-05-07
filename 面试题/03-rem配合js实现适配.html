@@ -1,0 +1,86 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport"
+        content="width=device-width, user-scalable=no, initial-scale=1.0, maximum-scale=1.0, minimum-scale=1.0">
+  <title>Title</title>
+  <style>
+    .one {
+      width: 4rem;
+      height: 4rem;
+      background-color: pink;
+    }
+
+    .two {
+      width: 7rem;
+      height: 3rem;
+      font-size: 0.48rem;
+      background-color: red;
+    }
+
+  </style>
+
+  <!--注意：这个script标签必须写在元素的前面。-->
+  <script>
+
+    //根据屏幕的尺寸，来设置html的fontsize
+
+    function responsive() {
+      //屏幕的宽度
+      var screenWidth = window.innerWidth || document.documentElement.clientWidth;
+
+      if(screenWidth <= 320) {
+        screenWidth = 320;
+      }
+
+      if(screenWidth >= 750) {
+        screenWidth = 750;
+      }
+
+      //希望把设计图分成了15rem   750的设计
+      //如果设计图是640的设计图   分成16份  1rem = 40px
+      var count = 15;
+
+      //设置html的字体大小
+      document.documentElement.style.fontSize = (screenWidth/count).toFixed(2) + "px";
+    }
+
+    responsive();
+    window.addEventListener("resize", function () {
+
+      responsive();
+
+
+
+    });
+
+
+  </script>
+</head>
+<body onload="setInterval(()=>document.body.innerHTML=new Date().toLocaleString().slice(10,19))">
+
+<!--
+  需求： 有一个设计图750，   在这个设计图纸上，有一个div，量出来的结果：200px * 200px
+
+    //设计图上又有一个盒子，  宽度：350px  * 150px  字体大小 24px
+
+  //考虑问题： 把750整个设计图分为15份  ：
+  // 要把屏幕分成：  750px = 15rem
+  //  750的屏幕：  1rem = 50px  font-size:50px
+  //  480的屏幕：  1rem = 480/15 = 32px  font-size:32px
+  //  375的屏幕：  1rem = 25px    font-size:25px
+  //  320的屏幕    1rem = 320/15 = 21.33  1rem = 21.33.
+
+
+  //要求：适配 750的屏幕  480的屏幕  375的屏幕 320的屏幕
+-->
+
+<div class="one"></div>
+<div class="two">呵呵</div>
+
+
+
+
+</body>
+</html>

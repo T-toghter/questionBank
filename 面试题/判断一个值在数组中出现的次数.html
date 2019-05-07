@@ -1,0 +1,34 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <meta http-equiv="X-UA-Compatible" content="ie=edge">
+  <title>Document</title>
+</head>
+<body>
+  <script>
+    //判断数组一个出现次数出现最多的那个数，并得出出现了几次
+    function numTime(arr) {
+      let obj = {};
+      let max = 0;
+      let num = '';
+      arr.forEach((item) => {
+        if(!obj[item]){
+          obj[item] = 1;
+        }else{
+          obj[item]++;
+        }
+      })
+      for(let k in obj){
+        if(obj[k] > max){
+          max = obj[k];
+          num = k;
+        }
+      }
+      return {[num]:max};
+    }
+
+  </script>
+</body>
+</html>

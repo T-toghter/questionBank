@@ -1,0 +1,69 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <meta http-equiv="X-UA-Compatible" content="ie=edge">
+  <title>Document</title>
+</head>
+<body>
+  <button id="debounce">防抖</button>
+  <script>
+
+    //防抖:任务频繁触发的情况下，只有任务触发的间隔超过指定间隔的时候，任务才会执行;
+    //使用场景：input框输入值发送请求
+    window.onload = function(){
+      //1.页面一进来获取按钮，并绑定事件
+      var myDebounce = document.getElementById('debounce');
+      myDebounce.addEventListener('click',debounce(sayDebounce));
+    }
+      //2.防抖函数
+    function debounce(fn) {
+      let timeout = null;
+      return function(){
+        //4.清楚定时器
+        clearTimeout(timeout);
+        //5.创建一个新的定时器
+        timeout = setTimeout(() => {
+          fn.call(this,arguments);
+        },500);
+      }
+    }
+      //3.防抖事件处理
+    function sayDebounce(params) {
+      console.log('防抖成功！');
+    }
+
+
+
+    //节流：指定时间间隔内只会执行一次任务,使用场景：防止用户多次点击
+    window.onload = function(){
+      //1.页面一进来获取按钮，并绑定事件
+      var myThrottle = document.getElementById('debounce');
+      myThrottle.addEventListener('click',throttle(sayThrottle));
+    }
+      //2.防抖函数
+    function throttle(fn){
+      //4.通过闭包保存一个标记
+      let canRun = true;
+      return function(){
+        // 5、在函数开头判断标志是否为 true，不为 true 则中断函数
+        if(!canRun){
+          return;
+        }
+        // 6、将 canRun 设置为 false，防止执行之前再被执行
+        canRun = false;
+        // 7、定时器
+        setTimeout(() => {
+          fn.call(this,arguments);
+          canRun = true;
+        },1000)
+      }
+    }
+      // 3、需要节流的事件
+    function sayThrottle() {
+      console.log("节流成功！");
+    }
+  </script>
+</body>
+</html>
