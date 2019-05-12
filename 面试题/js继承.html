@@ -15,18 +15,36 @@
     //   }
     // }
     //1.原型链继承(子函数的原型指向父函数的实例,再通过子函数的实例上的原型链继承到父函数的数据)
-    // function Son() {
-    //   this.name = 'son';
-    // }
-    // Son.prototype = new Far();
-    // var son = new Son();
-    // console.log(son.__proto__.name);
+      function Animal(){
+        this.names = ["cat", "dog"];
+      }
+      function Cat(){}
+
+      Cat.prototype = new Animal();
+
+      var instance1 = new Cat();
+      instance1.names.push("tiger");
+      console.log(instance1.names); // ["cat", "dog", "tiger"]
+
+      var instance2 = new Cat(); 
+      console.log(instance2.names); // ["cat", "dog", "tiger"]
+    //问题：
+    //1.当原型链中包含引用类型值的原型时,该引用类型值会被所有实例共享;
+    //2.在创建子类型时,不能向父类型的构造函数中传递参数.
+    
     //2.构造函数继承
-    // function Son() {
-    //   Far.call(this);
-    //   this.name = 'son';
-    // }
-    // var son = new Son();
+      function Father(){
+        this.colors = ["red","blue","green"];
+      }
+      function Son(){
+        Father.call(this);//继承了Father,且向父类型传递参数
+      }
+      var instance1 = new Son();
+      instance1.colors.push("black");
+      console.log(instance1.colors);//"red,blue,green,black"
+
+      var instance2 = new Son();
+      console.log(instance2.colors);//"red,blue,green" 可见引用类型值是独立的
     //3.ES6继承
     // class Farther {
     //   constructor(name){
