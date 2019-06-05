@@ -118,19 +118,19 @@
   </div>
 
   <script>
-    var imgs = document.querySelectorAll('img');
+    var imgs = document.querySelectorAll('img'); //获取图片
     var lazyload = function(){
-      var scrollTop = document.body.scrollTop || document.documentElement.scrollTop;
-      var winTop = window.innerHeight;
+      var scrollTop = document.body.scrollTop || document.documentElement.scrollTop; //窗口的滚动距离
+      var winTop = window.innerHeight;  //窗口的高度
       for(var i=0;i < imgs.length;i++){
-        if(imgs[i].offsetTop < scrollTop + winTop ){
+        if(imgs[i].offsetTop < scrollTop + winTop ){  //图片滚动的距离小于窗口高度加滚动距离，就给img添加图片路径
           imgs[i].src = imgs[i].getAttribute('data-src');
         }
       }
     }
 
 
-    function throttle(fn,delay){
+    function throttle(fn,delay){  //起到节流的作用
       var timer = null;
       return function () {
         clearTimeout(timer);
@@ -141,7 +141,7 @@
     }
 
 
-    window.onscroll = throttle(lazyload,500);
+    window.onscroll = throttle(lazyload,500); //窗口滚动函数
   </script>
 </body>
 </html>
