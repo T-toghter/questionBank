@@ -11,22 +11,25 @@
 <body>
   <script>
     let controller = new AbortController();  //接口代表一个控制器对象，允许你在需要时中止一个或多个DOM请求
-    let signal = controller.signal;   //返回一个AbortSignal对象实例，它可以用来 with(继续)/abort(终止) 一个DOM请求
+    let signal = controller.signal;   //获取其关联 AbortSignal对象的引用
     
     let timeoutPromise = (timeout) => {
       return new Promise((resolve,reject) => {
         setTimeout(() => {
           resolve(new Response('timeout',{status: 504,statusText:'请求超时'}));
           contreller.abort();   //终止请求的操作
-        })
+        },timeout)
       })
     }
     
     let requestPromise = (url) => {
       return fetch(url,{
-        signal = signal;
+        signal: signal;  //将信号和控制器与获取请求相关联然后允许我们通过调用AbortController.abort()中止请求
       });
     }
+    
+    //Promise.race([promise1,promise2]) 传入多个Promise对象，等待最快对象完成
+    //Promise.all([promise1,promise2]) 传入多个Promise 对象，等待所有对象完成
     
     Promise.race([timeoutPromise(1000),requestPromise('https://www.baidu.com')])
       .then(rsp =>
