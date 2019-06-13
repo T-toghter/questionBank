@@ -1,0 +1,41 @@
+    
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <meta http-equiv="X-UA-Compatible" content="ie=edge">
+  <title>Document</title>
+  </style>
+</head>
+<body>
+  <script>
+    let controller = new AbortController();  //接口代表一个控制器对象，允许你在需要时中止一个或多个DOM请求
+    let signal = controller.signal;   //返回一个AbortSignal对象实例，它可以用来 with(继续)/abort(终止) 一个DOM请求
+    
+    let timeoutPromise = (timeout) => {
+      return new Promise((resolve,reject) => {
+        setTimeout(() => {
+          resolve(new Response('timeout',{status: 504,statusText:'请求超时'}));
+          contreller.abort();   //终止请求的操作
+        })
+      })
+    }
+    
+    let requestPromise = (url) => {
+      return fetch(url,{
+        signal = signal;
+      });
+    }
+    
+    Promise.race([timeoutPromise(1000),requestPromise('https://www.baidu.com')])
+      .then(rsp =>
+        console.log(rsp)
+      )
+      .catch(error => 
+        console.log(error)
+      )
+    
+  </script>
+</body>
+</html>
