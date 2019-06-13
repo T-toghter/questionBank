@@ -9,8 +9,7 @@
 <body>
   <button id="debounce">防抖</button>
   <script>
-
-    //防抖:任务频繁触发的情况下，只有任务触发的间隔超过指定间隔的时候，任务才会执行;
+      //防抖:任务频繁触发的情况下，只有任务触发的间隔超过指定间隔的时候，任务才会执行;
     //使用场景：input框输入值发送请求
     window.onload = function(){
       //1.页面一进来获取按钮，并绑定事件
@@ -35,35 +34,29 @@
     }
 
 
-
     //节流：指定时间间隔内只会执行一次任务,使用场景：防止用户多次点击
     window.onload = function(){
       //1.页面一进来获取按钮，并绑定事件
       var myThrottle = document.getElementById('debounce');
       myThrottle.addEventListener('click',throttle(sayThrottle));
     }
-      //2.防抖函数
+      //2.节流函数
     function throttle(fn){
-      //4.通过闭包保存一个标记
-      let canRun = true;
+      var timer = null;
       return function(){
-        // 5、在函数开头判断标志是否为 true，不为 true 则中断函数
-        if(!canRun){
-          return;
+        if(!timer){
+          timer = setTimeout(() => {
+            fn.call(this,arguments);
+            timer = null;
+          }, 1500);
         }
-        // 6、将 canRun 设置为 false，防止执行之前再被执行
-        canRun = false;
-        // 7、定时器
-        setTimeout(() => {
-          fn.call(this,arguments);
-          canRun = true;
-        },1000)
       }
     }
       // 3、需要节流的事件
     function sayThrottle() {
       console.log("节流成功！");
     }
+
   </script>
 </body>
 </html>
