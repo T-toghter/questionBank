@@ -27,16 +27,16 @@
 
 
     //深浅拷贝
-    function copy(obj) {
-      var obj1 = {};
-      for(var k in obj){  //遍历对象
-        if(obj[k] == 'object'){ //判断obj的每个对象是否是对象数据类型
-          obj1[k] = copy(obj[k])
-        }else{
-          obj1[k] = obj[k]
+    function clone(target) {
+      if (typeof target === 'object') {
+        let cloneTarget = Array.isArray(target) ? [] : {};
+        for (const key in target) {
+            cloneTarget[key] = clone(target[key]);
         }
+        return cloneTarget;
+      } else {
+        return target;
       }
-      return obj1;
     }
   </script>
 </body>
