@@ -118,13 +118,15 @@
   </div>
 
   <script>
-    var imgs = document.querySelectorAll('img'); //获取图片
+    // 思路：判断元素是否在可视区域，在可视区域内给图片赋值地址
+    var imgs = document.querySelectorAll('img'); // 获取图片
     var lazyload = function(){
-      var scrollTop = document.body.scrollTop || document.documentElement.scrollTop; //窗口的滚动距离
+      var scrollTop = document.body.scrollTop || document.documentElement.scrollTop; // 窗口的滚动距离
       var winTop = window.innerHeight;  //窗口的高度
       for(var i=0;i < imgs.length;i++){
-        if(imgs[i].offsetTop < scrollTop + winTop ){  //图片滚动的距离小于窗口高度加滚动距离，就给img添加图片路径
-          imgs[i].src = imgs[i].getAttribute('data-src');
+        // offsetTop 获取元素相对于文档顶部的距离
+        if(imgs[i].offsetTop < scrollTop + winTop ){  // 图片距离文档顶部的距离小于窗口高度+窗口滚动距离
+          imgs[i].src = imgs[i].getAttribute('data-src');  // 给img的src属性添加图片路径
         }
       }
     }
