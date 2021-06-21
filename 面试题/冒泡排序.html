@@ -44,20 +44,13 @@
     //冒泡排序,相邻两个进行比较大小，交换位子
 
     // var arr = [3,2,1,5,4,8,9,7,6];
-    // for(var i=arr.length-1;i>=0;i--){
-    //   var flag = true;
-    //   for(var j=0;j<i;j++){
-    //     if(arr[j]>arr[j+1]){
-    //       flag=false;
-    //       var temp=arr[j];
-    //       arr[j]=arr[j+1];
-    //       arr[j+1]=temp;
-    //     }
-    //   }
-    //   if(flag){
-    //     break;
-    //   }
-    // }
+    for (let i = 0; i < arr.length; i++) {
+      for (let j = 1; j < arr.length - i; j++) {
+        if (arr[j-1] > arr[j]) {
+          [arr[j-1], arr[j]] = [arr[j], arr[j-1]]
+        }
+      };
+    };
     // console.log(arr);
 
 
